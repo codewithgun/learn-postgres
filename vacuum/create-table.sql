@@ -1,0 +1,4 @@
+CREATE TABLE STUDENT (
+    id SERIAL NOT NULL,
+    name TEXT
+);

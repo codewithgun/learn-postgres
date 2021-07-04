@@ -1,0 +1,14 @@
+services:
+    db:
+      image: postgres
+      restart: always
+      ports:
+        - '8432:5432'
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: postgres
+      volumes:
+        - pg_data:${pwd}/postgresql/data/
+volumes:
+    pg_data:

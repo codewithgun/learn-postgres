@@ -4,10 +4,10 @@
 - [x] Vacuum
 - [ ] View
 - [ ] Materialized View
+- [ ] Explain, Anaylze
+- [ ] Indexes
 - [ ] CTE
 - [ ] Recursive CTE
-- [ ] Indexes
-- [ ] Explain, Anaylze
 - [ ] Stored Procedure
 - [ ] Trigger
 - [ ] Listen, Notify

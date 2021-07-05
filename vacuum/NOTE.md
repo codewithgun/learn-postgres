@@ -215,3 +215,10 @@ After full `vacuum`, the 2 rows was `truly` removed as shown on the table below.
 | 616 | 0 | {"\\x01000000","\\x0531"}
 
 In summary, normal `vacuum` should be run periodically to ensure disk spaces. Luckily, postgres come with `auto vacuum` feature. However, some of the database administrator still prefer to run `vacuum` by themselves as `auto vacuum` will kick-in only when the condition meet.
+
+## Useful links
+- https://www.percona.com/blog/2018/08/06/basic-understanding-bloat-vacuum-postgresql-mvcc/
+- https://www.shubhamdipt.com/blog/how-to-clean-dead-tuples-and-monitor-postgresql-using-vacuum/
+- https://stackoverflow.com/questions/49695279/why-xmax-system-column-in-postgres-table-is-not-zero-for-non-deleted-row
+- https://www.cybertec-postgresql.com/en/whats-in-an-xmax/
+- https://www.youtube.com/watch?v=rsRgFhZHGLo&t=54s

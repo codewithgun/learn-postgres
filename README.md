@@ -4,6 +4,7 @@
 - [x] Vacuum
 - [ ] View
 - [ ] Materialized View
+- [ ] Recursive view
 - [ ] Explain, Anaylze
 - [ ] Indexes
 - [ ] CTE

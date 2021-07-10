@@ -12,3 +12,5 @@
 - [ ] Stored Procedure
 - [ ] Trigger
 - [ ] Listen, Notify
+- [ ] Partition
+- [ ] Master-slave replication

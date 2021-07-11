@@ -89,3 +89,20 @@ Result:
  For example, the actual database row consists of 10000 + rows, but the out-of-date `pg_statistic` causes postgres to use `full-table scan` instead of `index scan`, which has a huge impact on performance.
  
  The case above, `Seq Scan` was choosen because there was only 52 rows in total, and postgres decided that traveling index `b-tree` was much more expensive than `Seq Scan`.
+
+ Now, let's duplicate the number of records by running the query below many times.
+ ```
+ INSERT INTO student (name, created_at, age) SELECT name, created_at, age FROM student;
+ ```
+ The `student` table current has `26624` row. And, we run `EXPLAIN ANALYZE select * from student where id = 1;` again. For this round, we are getting different execution plan.
+ ```
+                                                       QUERY PLAN                                                       
+-----------------------------------------------------------------------------------------------------------------------
+ Index Scan using student_pkey on student  (cost=0.29..8.30 rows=1 width=50) (actual time=0.006..0.006 rows=1 loops=1)
+   Index Cond: (id = 1)
+ Planning Time: 0.191 ms
+ Execution Time: 0.019 ms
+ ```
+ Postgres determine that, traveling `b-tree` is much more cheaper than `Seq Scan` as the number of rows was too much. Postgres based on the result in `b-tree` index to retrive the raw results from specific `heap` => `block` => `tuple`.
+
+ 

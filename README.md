@@ -5,7 +5,7 @@
 - [x] View
 - [ ] Materialized View
 - [ ] Recursive view
-- [ ] Explain, Analyze
+- [x] Explain, Analyze
 - [ ] Indexes
   - [ ] B-tree
   - [ ] Hash

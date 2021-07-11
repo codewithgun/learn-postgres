@@ -98,4 +98,43 @@ You will notice that, the view above is querying from `wallet_detail` view and `
 
 ### Security (authorization)
 ---
-We can expose only certain columns of the table to other database user (`role`) by granting privileges of the view to that user.
+We can expose only certain columns of the table to other database user (`role`) by granting privileges of the view to that user, and deny the access to all the base table. 
+
+**Scenario**
+
+We are corporating with another company called `alice`, which is a big data company. We are required to give them all of our transaction records for data analysis But, we do not wish to expose all the sensitive details of the transaction.
+
+First, we create a `user` for `alice` company.
+```
+CREATE ROLE alice WITH LOGIN PASSWORD 'abcd1234';
+```
+Check whether the `alice` user was created by using the query below.
+```
+SELECT rolname FROM pg_roles WHERE rolname = 'alice';
+```
+After that, we create a view, which will select only the necessary information needed by `alice`.
+```
+CREATE VIEW transaction_analysis AS select tx.tx_id "hash", tx.amount "amount", a.address "address", c.name "coin" from transactions tx left join wallet w on tx.wallet_id = w.id left join coins c on c.id = w.coin_id left join addresses a on a.id = w.address_id;
+```
+We grant the access to `public` schema, then we grant read-only privilege to `alice`. However, since view is read-only, we can grant full privilege to `alice` as well.
+```
+GRANT ALL PRIVILEGES ON SCHEMA public TO alice;
+GRANT SELECT ON transaction_analysis TO alice;
+```
+Now, let's test whether the authorization is working by login as `alice`.
+```
+psql -U alice -d postgres
+```
+Then, we try to query from an unauthorized table.
+```
+SELECT * from addresses;
+```
+Postgres returned us `ERROR:  permission denied for table addresses`. Let's query from the view `transaction_analysis` which alice is authorized to access.
+```
+SELECT * FROM transaction_analysis;
+```
+Postgres returned the result of the view.
+| hash | amount | address | coin |
+| --- | --- | --- | --- |
+| c598a424669bcde2c03d37b24714b5b63c3604b8b0f4849eed9bbf841aa4a49 | 10.00 | TAUN6FwrnwwmaEqYcckffC7wYmbaS6cBiX | Tron |
+| ... | ... | ... | ... |

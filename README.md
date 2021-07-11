@@ -13,7 +13,7 @@
   - [ ] GIN
   - [ ] BRIN
   - [ ] SP-GiST
-- [ ] CTE
+- [x] CTE
 - [ ] Recursive CTE
 - [ ] Stored Procedure
 - [ ] Trigger

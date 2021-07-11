@@ -5,8 +5,14 @@
 - [x] View
 - [ ] Materialized View
 - [ ] Recursive view
-- [ ] Explain, Anaylze
+- [ ] Explain, Analyze
 - [ ] Indexes
+  - [ ] B-tree
+  - [ ] Hash
+  - [ ] GiST
+  - [ ] GIN
+  - [ ] BRIN
+  - [ ] SP-GiST
 - [ ] CTE
 - [ ] Recursive CTE
 - [ ] Stored Procedure

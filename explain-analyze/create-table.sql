@@ -1,0 +1,7 @@
+CREATE TABLE student (
+    id SERIAL NOT NULL,
+    name TEXT NOT NULL,
+    age NUMERIC NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    PRIMARY KEY (id)
+);

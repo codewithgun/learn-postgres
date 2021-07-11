@@ -26,5 +26,6 @@ CREATE TABLE transactions (
     tx_id TEXT NOT NULL UNIQUE,
     amount DECIMAL(50, 30) NOT NULL,
     wallet_id INTEGER NOT NULL,
+    PRIMARY KEY (id),
     FOREIGN KEY (wallet_id) REFERENCES wallet(id)
 );

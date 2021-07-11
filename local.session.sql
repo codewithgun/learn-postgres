@@ -1,1 +1,7 @@
-SELECT a.address as address, w.balance as balance, u.name as name, c.name as coin from wallet w LEFT JOIN addresses a on a.id = w.address_id LEFT JOIN users u on a.user_id = u.id LEFT JOIN coins c on c.id = w.coin_id;
+WITH formatted_user AS (
+    SELECT id, DATE_TRUNC('day', created_at) AS DATE FROM users
+), user_report AS (
+    SELECT COUNT(id), date FROM formatted_user GROUP BY date order by date
+)
+
+SELECT * FROM user_report WHERE date BETWEEN TO_DATE('01-07-2021', 'DD-MM-YYYY') AND TO_DATE('01-08-2021', 'DD-MM-YYYY');

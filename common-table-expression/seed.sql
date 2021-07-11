@@ -1,0 +1,1 @@
+INSERT INTO users (created_at) SELECT r_date FROM random_date;

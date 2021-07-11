@@ -105,4 +105,18 @@ Result:
  ```
  Postgres determine that, traveling `b-tree` is much more cheaper than `Seq Scan` as the number of rows was too much. Postgres based on the result in `b-tree` index to retrive the raw results from specific `heap` => `block` => `tuple`.
 
- 
+If we select the columns, which already exists in `b-tree` index, the execution plan will be different.
+```
+EXPLAIN ANALYZE select id from student WHERE id = 100;
+```
+Result:
+```
+                                                        QUERY PLAN                                                         
+---------------------------------------------------------------------------------------------------------------------------
+ Index Only Scan using student_pkey on student  (cost=0.29..4.30 rows=1 width=4) (actual time=0.013..0.014 rows=1 loops=1)
+   Index Cond: (id = 100)
+   Heap Fetches: 0
+ Planning Time: 0.056 ms
+ Execution Time: 0.030 ms
+ ```
+ The planner use `Index Scan` on the previous query, while it used `Index Only Scan` for the current query. This is because, the `id` column already exists in the `b-tree` index. Once postgres travel finish the `b-tree`, it already have the `id` value. Therefore, postgres doesn't require to go to `heap` => `block` => `tuple` to get the other columns (`age`, `name`, `created_at`).

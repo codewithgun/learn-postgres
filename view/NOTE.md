@@ -138,3 +138,8 @@ Postgres returned the result of the view.
 | --- | --- | --- | --- |
 | c598a424669bcde2c03d37b24714b5b63c3604b8b0f4849eed9bbf841aa4a49 | 10.00 | TAUN6FwrnwwmaEqYcckffC7wYmbaS6cBiX | Tron |
 | ... | ... | ... | ... |
+
+## Useful links
+- https://www.postgresqltutorial.com/postgresql-roles/
+- https://www.postgresqltutorial.com/managing-postgresql-views/
+- https://illuminatedcomputing.com/posts/2017/03/postgres-permissions/

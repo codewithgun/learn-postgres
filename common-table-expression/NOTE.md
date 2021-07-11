@@ -111,3 +111,7 @@ final_report AS (
 SELECT * FROM final_report ORDER BY date;
 ```
 Both of them produces the same results. But with `CTE`, the query is much more readable and maintainable.
+
+## To-Add
+---
+- Execution plan on CTE. Example, `CTE Scan` performance. (https://www.2ndquadrant.com/en/blog/postgresql-ctes-are-optimization-fences/)

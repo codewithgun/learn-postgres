@@ -31,4 +31,4 @@ SELECT md5((random() * 100000)::text),
         order by random()
         LIMIT 1
     ), NOW() + (random() * (NOW() + '150 days' - NOW()))
-from generate_series(1, 1000000);
+from generate_series(1, 10000000);

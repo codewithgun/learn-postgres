@@ -70,3 +70,6 @@ The execution time decreased from 9997.982 ms to 0.040 ms because it just retriv
 However, if we insert a new transaction for date `2021-12-13`, the result of materialzed view doesn't reflect the new transaction inserted. This can be fixed by running `REFRESH MATERIALIZED VIEW daily_transaction_summary`. But, this will has huge impact on performance as postgres will run the underlying query again, and store the latest result.
 
 It is recommended to create a cronjob, which will refresh the materialzed view at specific time. For example, everyday 12.00 A.M.
+
+### To-add
+- [ ] Indexing on materialzed view

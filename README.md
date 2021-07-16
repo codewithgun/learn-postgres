@@ -3,7 +3,7 @@
 ## List
 - [x] Vacuum
 - [x] View
-- [ ] Materialized View
+- [x] Materialized View
 - [ ] Recursive view
 - [x] Explain, Analyze
 - [ ] Indexes

@@ -1,0 +1,2 @@
+# Overview
+Materialized view is similar to view. We may think it as an `extended` view, where it store the view definition such as `query` underlying, at the same time it store the result as well. Since it `extended` view, therefore, materialized view is `read-only`. The `result` stored in materialized view is not up to date until it is `refreshed`.

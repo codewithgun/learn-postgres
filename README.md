@@ -14,6 +14,7 @@
   - [ ] BRIN
   - [ ] SP-GiST
 - [x] CTE
+- [ ] Concurrency and lock
 - [ ] Recursive CTE
 - [ ] Stored Procedure
 - [ ] Trigger

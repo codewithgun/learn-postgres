@@ -43,3 +43,54 @@ In PostgreSQL, `exclusive row-level lock` is automatically applied when the row 
 Since I got `double spending` issue today. Therefore, I will be experimenting on `lock` as a solution for double spending issue. 
 
 Create tables and seed some dummy data by running `create-table.sql` and `seed.sql`.
+
+The wallet balance before simulating withdrawal spam.
+```
+postgres=# select * from wallets;
+ id |         balance          |     name     
+ ----+--------------------------+--------------
+ 2 | 100.00000000000000000000 | codewithlove
+ 1 | 100.00000000000000000000 | codewithgun
+```
+
+Now, simulate withdrawal spam by running the code below in the terminal.
+```
+ts-node withdraw-without-lock.ts
+```
+The code will spam withdrawal 100 times, with the amount of 50 for each withdrawal. There will be only 1 withdrawal success, while the others failed due to insufficient balance. Therefore, the expected result should be as below.
+```
+postgres=# select * from wallets;
+ id |         balance          |     name     
+ ----+--------------------------+--------------
+ 2 | 100.00000000000000000000 | codewithlove
+ 1 |  50.00000000000000000000 | codewithgun
+```
+But, when query from database, the result below was shown.
+```
+postgres=# select * from wallets;
+ id |          balance          |     name     
+ ----+---------------------------+--------------
+ 2 |  100.00000000000000000000 | codewithlove
+ 1 | -850.00000000000000000000 | codewithgun
+```
+This is really bad as it causes financial lost to the company.
+
+Now, let's reset back the balance by running the query below.
+```
+UPDATE wallets SET balance = 100;
+```
+Then, we run the another simulation withdrawal spam program, with `exclusive row-level lock` implemented.
+```
+ts-node concurrency-lock/withdraw-with-lock.ts 
+```
+Let's check the result in database.
+```
+postgres=# select * from wallets;
+ id |         balance          |     name     
+ ----+--------------------------+--------------
+  1 |  50.00000000000000000000 | codewithgun
+  2 | 100.00000000000000000000 | codewithlove
+```
+Nice. The result was same as we expected.
+
+In summary, depends on the `consistency` of the data, we should decide the right `lock level` and `lock type`. The most common scenario for `exclusive lock` I knew was double spending and double booking. While, the common scenario for `shared lock` I knew was report generation or account closing (accounting term). For example, everyday midnight time, you can view bank details, but no transaction can be made.

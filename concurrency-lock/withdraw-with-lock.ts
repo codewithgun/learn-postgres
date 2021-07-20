@@ -19,7 +19,7 @@ const pool = new pg.Pool({
 async function withdraw(name: string, withdrawAmount: number) {
 	let client = await pool.connect();
 	await client.query("BEGIN TRANSACTION");
-	let { id, balance } = (await client.query<Wallet>("SELECT id, balance FROM wallets WHERE name = $1", [name])).rows[0];
+	let { id, balance } = (await client.query<Wallet>("SELECT id, balance FROM wallets WHERE name = $1 FOR UPDATE", [name])).rows[0];
 	let numBalance = Number.parseInt(balance); //BigNumber should be used
 	//This should block overspending. However, it won't if there was concurrent incoming request
 	if (numBalance > withdrawAmount) {

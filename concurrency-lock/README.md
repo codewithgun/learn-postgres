@@ -6,8 +6,8 @@ Concurrency, multiple connection to database happening at the same time. It is g
 | Issue | Description | Happen in Isolation | Source |
 | --- | --- | --- | --- |
 | Dirty read | Reading uncommitted data | Read uncommitted | https://en.wikipedia.org/wiki/Isolation_(database_systems)#Dirty_reads |
-| Non-repeatable read | Different `value` was returned from the same query in a single transaction, due to `update` commit from another transaction | https://en.wikipedia.org/wiki/Isolation_(database_systems)#Non-repeatable_reads |
-| Phantom read | Different `records` was returned from the same query in a single transaction, due to `insert` or `delete` commit from another transaction | https://en.wikipedia.org/wiki/Isolation_(database_systems)#Phantom_reads |
+| Non-repeatable read | Different `value` was returned from the same query in a single transaction, due to `update` commit from another transaction | Read committed, Read uncommitted | https://en.wikipedia.org/wiki/Isolation_(database_systems)#Non-repeatable_reads |
+| Phantom read | Different `records` was returned from the same query in a single transaction, due to `insert` or `delete` commit from another transaction | Repeatable Reads, Read uncommitted, Read committed | https://en.wikipedia.org/wiki/Isolation_(database_systems)#Phantom_reads |
 
 ## Solution
 `Lock` can be used to solve the issues above, by sacrificing the performance provided by concurrency by controlling the access to the `row` or `table`.

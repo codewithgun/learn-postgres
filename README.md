@@ -14,8 +14,9 @@
   - [ ] BRIN
   - [ ] SP-GiST
 - [x] CTE
-- [ ] Concurrency and lock
-  - [ ] Exclusive vs Shared lock
+- [x] Concurrency and lock
+  - [x] Exclusive vs Shared lock
+  - [ ] Row level vs Table level lock
 - [ ] Recursive CTE
 - [ ] Stored Procedure
 - [ ] Trigger

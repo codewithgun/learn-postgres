@@ -15,6 +15,7 @@
   - [ ] SP-GiST
 - [x] CTE
 - [ ] Concurrency and lock
+  - [ ] Exclusive vs Shared lock
 - [ ] Recursive CTE
 - [ ] Stored Procedure
 - [ ] Trigger

@@ -38,3 +38,8 @@ Concurrency, multiple connection to database happening at the same time. It is g
 | Table | Lock on `table`, all rows in the table cannot be access
 
 In PostgreSQL, `exclusive row-level lock` is automatically applied when the row is updated or deleted. (https://www.postgresql.org/docs/9.1/explicit-locking.html)
+
+# Experiments
+Since I got `double spending` issue today. Therefore, I will be experimenting on `lock` as a solution for double spending issue. 
+
+Create tables and seed some dummy data by running `create-table.sql` and `seed.sql`.

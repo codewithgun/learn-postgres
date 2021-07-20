@@ -24,4 +24,17 @@ Concurrency, multiple connection to database happening at the same time. It is g
 > In PostgreSQL, `phantom read` not allowed. Therefore, it allow us to see only data committed before the transaction begin. (https://www.postgresql.org/docs/9.5/transaction-iso.html)
 
 ## Solution
-`Lock` can be used to solve the issues above, by sacrificing the performance provided by concurrency by controlling the access to the `row` or `table`.
+`Lock` can be used to solve the issues above, by sacrificing the performance gain from concurrency by controlling the access to the `row` or `table`.
+## Types of Lock
+| Lock | Description |
+| --- | --- |
+| Exclusive Lock | Only the transaction accquired the lock can access it (`select`, `update`, `delete`) |
+| Shared lock | Only the transaction accquired the lock can `update` or `delete` it. The other transactions still can read it |
+
+## Lock level
+| Level | Description |
+| --- | --- |
+| Row | Lock on `row`, other rows still can be access
+| Table | Lock on `table`, all rows in the table cannot be access
+
+In PostgreSQL, `exclusive row-level lock` is automatically applied when the row is updated or deleted. (https://www.postgresql.org/docs/9.1/explicit-locking.html)

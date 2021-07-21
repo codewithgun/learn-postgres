@@ -11,6 +11,8 @@ Concurrency, multiple connection to database happening at the same time. It is g
 | Phantom read | Different `records` was returned from the same query in a single transaction, due to `insert` or `delete` commit from another transaction | Repeatable Reads, Read uncommitted, Read committed | https://en.wikipedia.org/wiki/Isolation_(database_systems)#Phantom_reads |
 
 ## Isolation
+Isolation control the seperation (isolation) between transactions. We can think as different transaction having different workspace, while isolation control the visibility of query made in the workspace for another workspace.
+
 | Type | Description | Lock |
 | --- | --- | --- |
 | Read uncommitted | Transaction 1 can read all uncommitted changes made by transaction 2 | No locks |
